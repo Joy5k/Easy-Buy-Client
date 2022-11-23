@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
+import Blog from "../Pages/Blog/Blog";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Log/Login";
 import SignUp from "../Pages/Log/SignUp";
@@ -26,6 +27,9 @@ export const router = createBrowserRouter([
                 path: '/phones/:id',
                 element: <Phones></Phones>,
                 loader:({params})=>fetch(`http://localhost:5000/category/${params.id}`)
+            }, {
+                path: '/blog',
+                element:<Blog></Blog>
             }
         ]
     }
