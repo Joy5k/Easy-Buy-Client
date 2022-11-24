@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 const SignUp = () => {
@@ -77,6 +78,7 @@ const SignUp = () => {
             <div className="form-control mt-6">
               <button className="btn btn-primary">signUp</button>
             </div>
+            <p>Already have an account? <Link to='/login' className="text-primary underline">Login</Link></p>
           </div>
         </form>
       </div>

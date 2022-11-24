@@ -1,10 +1,20 @@
 import React from "react";
 import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthProvider";
+import useToken from "../../Routes/Hooks/Hooks";
 
 const Login = () => {
-  const { LoginUser,signInWithGoogle } = useContext(AuthContext);
+  const { LoginUser, signInWithGoogle } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate=useNavigate()
+  const from = location.state?.from?.pathname || '/';
+
+  if (useToken) {
+    navigate(from, { replace: true });
+}
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -59,7 +69,7 @@ const Login = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="password"
                 name="password"
                 className="input input-bordered"
@@ -75,6 +85,7 @@ const Login = () => {
             <div className="form-control mt-6">
               <button className="btn btn-accent">Login</button>
             </div>
+            <Link to='/signup' className="text-primary underline">Create a new Account</Link>
             <div className="divider">Sign in with social</div>
             <button onClick={handleGoogleSignIn} className="btn btn-accent">Google</button>
           </div>

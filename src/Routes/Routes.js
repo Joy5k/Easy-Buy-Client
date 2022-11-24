@@ -5,7 +5,9 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/Login/SignUp";
+import MyOrders from "../Pages/MyOrders/MyOrders";
 import  Phones from "../Pages/Phones/Phones/Phones";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +37,10 @@ export const router = createBrowserRouter([
             {
                 path: '*',
                 element:<ErrorPage></ErrorPage>
+            },
+            {
+                path: '/myorders',
+                element:<PrivateRoute><MyOrders></MyOrders></PrivateRoute>
             }
         ]
     }

@@ -115,13 +115,20 @@ const Navbar = () => {
           <li>
             <Link to='/blog'>Blog</Link>
           </li>
+          <li>
+           {user ?  <Link onClick={handleLogOut} to="/myorders" >
+            My Orders
+          </Link>:<>   </>}
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
         {user ? (
-          <Link onClick={handleLogOut} to="/" className="btn btn-primary">
+          <>
+           <Link onClick={handleLogOut} to="/" className="btn btn-primary">
             LogOut
           </Link>
+          </>
         ) : (
           <Link to="/login" className="btn btn-primary">
             Login
