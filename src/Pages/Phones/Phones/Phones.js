@@ -9,6 +9,7 @@ const Phones = () => {
     const products = phones.products;
     const brand = phones.brand;
     const [phoneInfo, setPhoneInfo] = useState(null);
+    const [closeModal, setCloseModal] = useState(true);
     console.log(phoneInfo,'phones');
     return (
         <div>
@@ -26,10 +27,15 @@ const Phones = () => {
                     setPhoneInfo={setPhoneInfo}
                 ></Phone>)
             }
-          </div>
-            <BookingModal
-            phoneInfo={phoneInfo}
+            </div>
+            {
+                closeModal&& <BookingModal
+                brand={brand}
+                    phoneInfo={phoneInfo}
+                    setCloseModal={setCloseModal}
             ></BookingModal>
+            }
+           
         </div>
     );
 };

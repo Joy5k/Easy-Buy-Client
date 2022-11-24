@@ -1,23 +1,39 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthProvider";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, UpdateUserInfo } = useContext(AuthContext);
+  const navigate=useNavigate()
   const handleSignUp = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
+    const name = form.name.value;
+    console.log(name,'my name')
     const password = form.password.value;
+    const data = {
+      displayName:name
+    }
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        UpdateUserInfo(data)
+          .then(() => {
+          navigate('/')
+          })
+          .catch(error => {
+          toast.error(error.message)
+        })
         form.reset();
       })
       .catch((error) => {
+        toast.error(error.message)
         console.log(error.message);
       });
+     
   };
   return (
     <div className="hero w-full min-h-screen bg-base-200">
@@ -40,17 +56,7 @@ const SignUp = () => {
                 required
               />
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Photo URL</span>
-              </label>
-              <input
-                type="text"
-                placeholder="https://"
-                name="photoURL"
-                className="input input-bordered"
-              />
-            </div>
+    
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>

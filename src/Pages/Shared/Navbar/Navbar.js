@@ -13,7 +13,7 @@ const Navbar = () => {
         console.log(error);
       });
   };
-  // here we get phoneCategory name for show on the navbar
+  // here we get phoneCategories name for show on the categories in navbar
   const { data: phonesCategory = [], isLoading } = useQuery({
     queryKey: ["phonesCategory"],
     queryFn: async () => {
@@ -22,7 +22,6 @@ const Navbar = () => {
       return data;
     },
   });
-  console.log(phonesCategory);
   if (isLoading) {
     return <SkeletonLoader></SkeletonLoader>;
   }

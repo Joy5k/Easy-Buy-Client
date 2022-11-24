@@ -1,23 +1,49 @@
 import React from 'react';
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../../context/AuthProvider';
 
-const BookingModal = ({ phoneInfo }) => {
+const BookingModal = ({ phoneInfo,brand,setCloseModal }) => {
 
   const { user } = useContext(AuthContext);
-  // const {model,price } = phoneInfo;
+  console.log(phoneInfo,'check img');
   console.log(user)
   const handleSubmit = event => {
     event.preventDefault();
     const name = user?.displayName;
     const email = user?.email;
     const itemName = phoneInfo?.model;
-    const itemPrice=phoneInfo?.reselPrice
+    const itemPrice = phoneInfo?.reselPrice;
+    const img = phoneInfo?.img;
     const phoneNumber = event.target.phoneNumber.value;
     const location = event.target.location.value;
-    console.log(name,email,itemName,itemPrice,phoneNumber,location);
-  }
+  
+  
+  const booking = {
+    PhoneBrand: brand,
+    email,
+    itemImage:img,
+    model: itemName,
+    price: itemPrice,
+    userPhoneNumber: phoneNumber,
+    userLocation:location
 
+  }
+  fetch('http://localhost:5000/booking', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+  },
+  body: JSON.stringify(booking)
+  })
+      .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      toast.success('Booking Confirmed');
+      setCloseModal(false)
+      
+    })
+}
     return (
         <>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -47,11 +73,11 @@ const BookingModal = ({ phoneInfo }) => {
                 <span className="label-text">Phone number</span>
               </label>
    
-              <input type="text" placeholder="Enter Your phone number" name='phoneNumber' className="input input-bordered" />
+              <input type="text" placeholder="Enter Your phone number" name='phoneNumber' className="input input-bordered" required />
               <label className="label">
                 <span className="label-text">Your location</span>
               </label>
-              <input type="text" placeholder="Your Location" name='location' className="input input-bordered" />
+              <input type="text" placeholder="Your Location" name='location' className="input input-bordered" required/>
             <button className='btn my-2'>Submit</button>
   </div>
           
