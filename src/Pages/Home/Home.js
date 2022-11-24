@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import SkeletonLoader from '../../components/Skeleton loader/Skeleton loader';
+import AboutUs from './AboutUs/AboutUs';
 import PhoneCategory from './PhoneCategory/PhoneCategory';
 
 const Home = () => {
@@ -41,7 +42,8 @@ const Home = () => {
                     category={category}
                 ></PhoneCategory>)
           }
-           </div>
+            </div>
+            <AboutUs></AboutUs>
       </div>
     );
 };
