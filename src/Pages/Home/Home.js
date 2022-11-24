@@ -21,8 +21,8 @@ const Home = () => {
     }
     return (
         <div className='my-12'>
-     <div className=" mb-12 hero min-h-screen" style={{ backgroundImage: `url("https://img.freepik.com/premium-vector/man-buying-new-cell-phone-seller-showing-smartphone-customer-vector-illustration-phone-store-inte_103044-1212.jpg?w=740")` }}>
-     <div className="hero-overlay bg-opacity-60"></div>          
+     <div className=" mb-12 hero min-h-screen " style={{ backgroundImage: `url("https://img.freepik.com/premium-vector/man-buying-new-cell-phone-seller-showing-smartphone-customer-vector-illustration-phone-store-inte_103044-1212.jpg?w=740")` }}>
+     <div className="hero-overlay bg-white bg-opacity-90"></div>          
   <div className="hero-content  p-0  flex-col lg:flex-row-reverse">
     <div className='w-1/2'><img src="https://img.freepik.com/premium-vector/man-buying-new-cell-phone-seller-showing-smartphone-customer-vector-illustration-phone-store-inte_103044-1212.jpg?w=2000" className="w-full rounded-lg shadow-2xl" alt='' /></div>
      <div className='w-1/2'>

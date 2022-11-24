@@ -1,11 +1,14 @@
 import React from 'react';
+import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookingModal from '../../Home/PhoneCategory/BookingModal/BookingModal';
 import Phone from '../Phone/Phone';
 
 const Phones = () => {
     const phones = useLoaderData();
     const products = phones.products;
     const brand = phones.brand;
+    const [phoneInfo, setPhoneInfo] = useState(null);
     console.log(phones,'phones');
     return (
         <div>
@@ -20,10 +23,11 @@ const Phones = () => {
                     key={phone.model}
                     phone={phone}
                     brand={brand}
+                    setPhoneInfo={setPhoneInfo}
                 ></Phone>)
             }
           </div>
-          
+          <BookingModal></BookingModal>
         </div>
     );
 };
