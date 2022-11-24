@@ -18,11 +18,10 @@ const Phone = ({ phone,brand,setPhoneInfo }) => {
                     <p className='font-semibold'>Resell-Price: <span className='font-bold'>{reselPrice}$</span></p>
                     <p><span className='font-semibold underline'>Description: </span>{description.slice(0,250)}...</p>
     <div className="card-actions justify-end">
-              {/* <button className="btn btn-primary">Book now</button> */}
               <label 
                 htmlFor="booking-modal"
                 className="btn btn-primary"
-                onClick={()=>setPhoneInfo(phone,brand)}
+                onClick={()=>setPhoneInfo(phone)}
               >Book now</label>
 
     </div>

@@ -9,7 +9,7 @@ const Phones = () => {
     const products = phones.products;
     const brand = phones.brand;
     const [phoneInfo, setPhoneInfo] = useState(null);
-    console.log(phones,'phones');
+    console.log(phoneInfo,'phones');
     return (
         <div>
             <div className='text-center my-4'>
@@ -27,7 +27,9 @@ const Phones = () => {
                 ></Phone>)
             }
           </div>
-          <BookingModal></BookingModal>
+            <BookingModal
+            phoneInfo={phoneInfo}
+            ></BookingModal>
         </div>
     );
 };

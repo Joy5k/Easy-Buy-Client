@@ -8,4 +8,4 @@ const MyOrders = () => {
     );
 };
 
-export default MyOrders;<h3>my orders</h3>
+export default MyOrders;

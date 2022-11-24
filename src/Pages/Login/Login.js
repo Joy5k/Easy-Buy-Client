@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthProvider";
-import useToken from "../../Routes/Hooks/Hooks";
+import useToken from "../../Hooks/Hooks";
 
 const Login = () => {
   const { LoginUser, signInWithGoogle } = useContext(AuthContext);
