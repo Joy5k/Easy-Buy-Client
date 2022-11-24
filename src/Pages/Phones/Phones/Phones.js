@@ -19,8 +19,8 @@ const Phones = () => {
             </div>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 my-6'>
             {
-                products.map(phone => <Phone
-                    key={phone.model}
+                products.map((phone,i) => <Phone
+                    key={i}
                     phone={phone}
                     brand={brand}
                     setPhoneInfo={setPhoneInfo}

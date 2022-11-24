@@ -4,11 +4,9 @@ const AboutUs = () => {
     return (
         <div>
             <h4 className='text-4xl font-bold text-center text-gray-700 my-10'>About Us</h4>
-            <h6 className='text-xl font-bold text-center text-gray-700 my-10'>About The Easy-Buy.Why you need the Easy-Buy!</h6>
+            <h6 className='text-xl font-bold text-center text-gray-700 '>About The Easy-Buy.Why you need the Easy-Buy!</h6>
           
-            <div className="hero min-h-screen  my-12">
-            {/* <div className=" mb-12 hero min-h-screen" style={{ backgroundImage: `url("https://img.freepik.com/premium-vector/man-buying-new-cell-phone-seller-showing-smartphone-customer-vector-illustration-phone-store-inte_103044-1212.jpg?w=740")` }}></div> */}
-            {/* <div className="hero-overlay bg-opacity-60"></div>    */}
+            <div className="hero min-h-screen  mb-12">
                 <div className="hero-content flex-col lg:flex-row">
                 <div className='w-1/2'><img src="https://img.freepik.com/premium-vector/man-buying-new-cell-phone-seller-showing-smartphone-customer-vector-illustration-phone-store-inte_103044-1212.jpg?w=2000" className="w-full rounded-lg shadow-2xl" alt='' /></div>
     <div className='w-1/2'>

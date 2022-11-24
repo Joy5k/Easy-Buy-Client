@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SkeletonLoader from '../../../components/Skeleton loader/Skeleton loader';
+import Spinner from '../../../components/Spinner/Spinner';
 
-const PhoneCategory = ({ category }) => {
-    const { brand } = category;
+const PhoneCategory = ({ category}) => {
+  const { brand } = category;
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-xl">
   <div className="card-body">

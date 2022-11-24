@@ -3,8 +3,8 @@ import Main from "../layout/Main";
 import Blog from "../Pages/Blog/Blog";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
-import Login from "../Pages/Log/Login";
-import SignUp from "../Pages/Log/SignUp";
+import Login from "../Pages/Login/Login";
+import SignUp from "../Pages/Login/SignUp";
 import  Phones from "../Pages/Phones/Phones/Phones";
 
 export const router = createBrowserRouter([
