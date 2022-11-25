@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,31 +9,46 @@ import useToken from "../../Hooks/Hooks";
 const Login = () => {
   const { LoginUser, signInWithGoogle } = useContext(AuthContext);
   const location = useLocation();
+  const {user}=useContext(AuthContext)
   const navigate=useNavigate()
   const from = location.state?.from?.pathname || '/';
-
-  if (useToken) {
-    navigate(from, { replace: true });
-}
-
+  const [email,setEmail]=useState('')
+  const [token] = useToken(email);
+console.log(token,'check')
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
-    const selectUser = form.userOrSeller.value;
-    console.log(selectUser)
+    const userCategory = form.userOrSeller.value;
     const password = form.password.value;
+    const userInfo = {
+      email,
+      role: userCategory,
+    }
     LoginUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        navigate(from, { replace: true })
+        setEmail(email)
         form.reset();
       })
       .catch((error) => {
         toast.error(error.message)
         console.log(error.message);
       });
-    };
+    fetch('http://localhost:5000/user', {
+      method: 'POST',
+      headers: {
+        'content-type':'application/json'
+      },
+      body: JSON.stringify(userInfo)
+     
+    })
+    .then(res=>res.json())
+      .then(data => {
+      console.log(data)
+    })
+  };
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(result => {
@@ -42,7 +58,8 @@ const Login = () => {
       .catch(error => {
         toast.error(error.message)
       console.log(error)
-    })
+      })
+   
     }
   return (
     <div className="hero w-full min-h-screen bg-base-200">

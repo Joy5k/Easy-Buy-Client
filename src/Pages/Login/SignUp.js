@@ -1,11 +1,18 @@
 import React, { useContext } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthProvider";
+import useToken from "../../Hooks/Hooks";
 
 const SignUp = () => {
   const { createUser, UpdateUserInfo } = useContext(AuthContext);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const[userEmail,setUserEmail]=useState('')
+  const [token] = useToken(userEmail);
+  if(token){
+    navigate('/');
+}
   const handleSignUp = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -20,6 +27,7 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        setUserEmail(email)
         UpdateUserInfo(data)
           .then(() => {
           navigate('/')

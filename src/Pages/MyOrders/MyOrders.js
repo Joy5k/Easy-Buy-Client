@@ -9,8 +9,7 @@ const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const [bookingsPhone, setBookingPhone] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/booking?email=${user.email}`)
+    axios.get(`http://localhost:5000/booking?email=${user.email}`)
       .then((data) => {
         setBookingPhone(data.data);
       });

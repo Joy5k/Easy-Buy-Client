@@ -5,12 +5,11 @@ import AboutUs from './AboutUs/AboutUs';
 import PhoneCategory from './PhoneCategory/PhoneCategory';
 
 const Home = () => {
-    const {data:phonesCategory=[],isLoading,refetch } = useQuery({
+    const {data:phonesCategory=[],isLoading} = useQuery({
         queryKey: ['phonesCategory'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/category')
             const data = await res.json();
-            refetch()
             return data
         }
 
