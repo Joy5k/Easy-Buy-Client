@@ -13,7 +13,7 @@ const Phones = () => {
   return (
     <div>
       <div className="text-center my-4">
-        <h2 className="text-4xl font-semibold">Choose Your favorite Phone</h2>
+        <h2 className="text-4xl font-bold">Choose Your favorite Phone</h2>
           </div>
           
       <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 my-6">

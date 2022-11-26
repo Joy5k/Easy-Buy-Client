@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 const Phone = ({ phone, brand, setPhoneInfo }) => {
   const {
@@ -10,6 +11,36 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
     reselPrice,
     description,
   } = phone;
+  const report = {
+    model,
+    img,
+    location,
+    orignalPrice,
+    usedTime,
+    reselPrice,
+    description,
+    // report:'reported',
+  }
+  const handleReport = id => {
+    fetch(`http://localhost:5000/report/${id}`, {
+      method: "put",
+      headers: {
+        authorization:`bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if(data.modifiedCount > 0){
+          toast.success('Send Reported to Admin successfully.')
+    
+        }
+        else{toast.warning('already reported this phone')}
+      })
+
+}
+ 
+  console.log(phone,'need the iid')
   return (
     <div>
       <div className="my-16 card w-full bg-base-100 shadow-xl border">
@@ -48,7 +79,13 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
 
          
 
-          <div className="card-actions justify-end">
+          <div className="card-actions grid grid-cols-2">
+            <label
+              className="btn bg-red-600 border-none w-full"
+              onClick={() => handleReport(phone._id)}
+            >
+              Report to Admin
+            </label>
             <label
               htmlFor="booking-modal"
               className="btn btn-primary w-full"
