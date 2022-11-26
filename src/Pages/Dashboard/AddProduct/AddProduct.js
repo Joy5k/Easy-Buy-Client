@@ -17,6 +17,7 @@ const AddProduct = () => {
   });
   // console.log(phonesCategory);
 
+console.log(user.email)
 
   const handleAddProduct = (event) => {
     event.preventDefault();
@@ -28,19 +29,22 @@ const AddProduct = () => {
     const condition = form.condition.value;
     const imgURL = form.imgURL.value;
     const price = form.price.value;
+    const OriginalPrice = form.OriginalPrice.value;
     const yearsOfUsed = form.yearsOfUsed.value;
     const description = form.description.value;
     const phoneInfo = {
       categoryId:brand,
       model,
       location,
+      orignalPrice:OriginalPrice,
       reselPrice: price,
       sellerPhoneNumber: phoneNumber,
       condition,
       img: imgURL,
       yearsOfUsed,
       description,
-      role:'seller'
+      role: 'seller',
+      email:user.email
 
     }
       fetch('http://localhost:5000/addPhone', {
@@ -54,7 +58,8 @@ const AddProduct = () => {
       })
         .then(res => res.json())
         .then(data => {
-          toast.success('Phone added successfully')
+          toast.success('Phone added successfully');
+          form.reset()
           console.log(data);
       })
   };
@@ -77,6 +82,7 @@ const AddProduct = () => {
                   type="text"
                   placeholder="model no."
                   className="input input-bordered"
+                  required
                 />
               </div>
               <div className="form-control">
@@ -88,17 +94,31 @@ const AddProduct = () => {
                   type="text"
                   placeholder="https://"
                   className="input input-bordered"
+                  required
                 />
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Price</span>
+                  <span className="label-text">Original Price</span>
+                </label>
+                <input
+                  name="OriginalPrice"
+                  type="text"
+                  placeholder="price"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Resell Price</span>
                 </label>
                 <input
                   name="price"
                   type="text"
                   placeholder="price"
                   className="input input-bordered"
+                  required
                 />
               </div>
               <div className="form-control">
@@ -121,6 +141,7 @@ const AddProduct = () => {
                   type="text"
                   placeholder="Dhaka,Barisal"
                   className="input input-bordered"
+                  required
                 />
               </div>
               <div className="form-control">
@@ -132,6 +153,7 @@ const AddProduct = () => {
                   type="text"
                   placeholder="1/2"
                   className="input input-bordered"
+                  required
                 />
               </div>
               <div>
