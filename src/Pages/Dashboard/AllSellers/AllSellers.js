@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 const AllSellers = () => {
     const { data: sellers = [] ,refetch,isLoading} = useQuery({
@@ -9,7 +10,21 @@ const AllSellers = () => {
           const data = await res.json();
           return data;
         },
-      });
+    });
+  const handleDeleteSellers = id => {
+    fetch(`http://localhost:5000/seller/${id}`, {
+      method: 'DELETE', 
+      headers: {
+        authorization:`bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+        .then(res => res.json())
+        .then(data => {
+          console.log('ok');
+          toast.success('successfully Deleted')
+          refetch();
+      })
+  }
     return (
         <div>
            <div className="overflow-x-auto">
@@ -31,7 +46,7 @@ const AllSellers = () => {
                 <td>{seller.email}</td>
                 <td>{seller.role}</td>
                 <td>
-                  <button className="btn bg-red-100 text-black">Delete</button>
+                  <button onClick={()=>handleDeleteSellers(seller._id)} className="btn bg-red-100 text-black">Delete</button>
                 </td>
               </tr>
             ))}
