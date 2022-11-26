@@ -10,6 +10,7 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
     usedTime,
     reselPrice,
     description,
+    uploadDate
   } = phone;
   const report = {
     model,
@@ -48,7 +49,6 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
           <img className="h-96 " src={img} alt="Phones" />
         </figure>
         <div className="card-body w-full">
-          <h2 className="card-title">Brand: {brand}</h2>
           <p className="font-semibold">
           <span className="font-bold">Resell Price</span>: <span className="font-bold">{reselPrice}$</span>
           </p>
@@ -69,6 +69,9 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
           </p>
           <p className="font-semibold">
           <span className="font-bold">Resell Price</span>: <span className="font-bold">{reselPrice}$</span>
+          </p>
+          <p className="font-semibold">
+          <span className="font-bold">Uploaded</span>: <span className="font-bold">{uploadDate}$</span>
           </p>
           <p>
             <span className="font-semibold ">Description: </span>

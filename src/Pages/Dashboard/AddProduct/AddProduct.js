@@ -21,6 +21,8 @@ console.log(user.email)
 const navigate = useNavigate();
   const handleAddProduct = (event) => {
     event.preventDefault();
+    const current = new Date();
+    const time = current.toLocaleDateString("en-BD");
     const form = event.target;
     const categoryId = form.categoryId.value;
     const model = form.model.value;
@@ -44,7 +46,8 @@ const navigate = useNavigate();
       yearsOfUsed,
       description,
       role: 'seller',
-      email:user.email
+      email: user.email,
+      uploadDate:time
 
     }
       fetch('http://localhost:5000/addPhone', {
