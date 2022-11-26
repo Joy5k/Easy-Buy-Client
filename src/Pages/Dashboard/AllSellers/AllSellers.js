@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { FaUserAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 const AllSellers = () => {
@@ -26,7 +27,9 @@ const AllSellers = () => {
       })
   }
     return (
-        <div>
+      <div>
+        {
+          sellers.length>0 ? 
            <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -52,7 +55,16 @@ const AllSellers = () => {
             ))}
           </tbody>
         </table>
-      </div>
+            </div>
+            :<div className="mt-40">
+            <span className="text-4xl">
+              <FaUserAlt className="text-7xl text-gray-400 text-center w-full mx-auto"></FaUserAlt>
+            </span>
+            <h3 className="text-6xl font-bold text-center my-auto text-gray-400 ">
+              No Seller Available
+            </h3>
+          </div>
+          }
         </div>
     );
 };

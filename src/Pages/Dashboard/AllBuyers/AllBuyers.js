@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { FaUserAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Spinner from "../../../components/Spinner/Spinner";
 
@@ -17,22 +18,25 @@ const AllBuyers = () => {
    fetch(`http://localhost:5000/user/${id}`,
      {
        method: 'DELETE'
-     }
+     })
      .then(res => res.json())
      .then(data => {
        console.log('ok');
        refetch()
      })
-   )
    console.log(id)
-toast.success(id)
+   toast.success('successfully Deleted Buyer')
   }
+
   if (isLoading) {
   return <Spinner></Spinner>
 }
   
   return (
     <div>
+      {
+        buyers.length > 0 ? 
+          
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -58,7 +62,16 @@ toast.success(id)
             ))}
           </tbody>
         </table>
-      </div>
+          </div>
+          : <div className="mt-40">
+          <span className="text-4xl">
+            <FaUserAlt className="text-7xl text-gray-400 text-center w-full mx-auto"></FaUserAlt>
+          </span>
+          <h3 className="text-6xl font-bold text-center my-auto text-gray-400 ">
+        No Buyers Available
+          </h3>
+        </div>
+        }
     </div>
   );
 };
