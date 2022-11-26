@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
+import { FaShopify } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthProvider";
 
 const MyOrders = () => {
@@ -21,6 +22,8 @@ const MyOrders = () => {
 
   return (
     <div>
+      {
+        bookingsPhone.length>0 ? 
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -35,7 +38,7 @@ const MyOrders = () => {
           <tbody>
             {bookingsPhone.map((phone, i) => (
               <tr key={i}>
-                    {console.log('phone',phone)}
+                    {console.log('phone',bookingsPhone.length)}
                     <td><img className="w-20 h-20" src={phone?.itemImage} alt="" /></td>
                     <td>{phone.PhoneBrand }</td>
                     <td>{phone.model }</td>
@@ -47,7 +50,12 @@ const MyOrders = () => {
             ))}
           </tbody>
         </table>
-      </div>
+          </div>
+          : <div className="mt-40">
+            <span className="text-4xl"><FaShopify className="text-7xl text-gray-400 text-center w-full mx-auto"></FaShopify></span>
+            <h3 className="text-6xl font-bold text-center my-auto text-gray-400 ">You have no Orders</h3>
+          </div>
+      }
     </div>
   );
 };

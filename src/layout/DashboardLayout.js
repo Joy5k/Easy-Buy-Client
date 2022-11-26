@@ -28,9 +28,9 @@ const Dashboard = () => {
         </div>
         <div className="drawer-side ">
           <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
-          <ul className="menu p-4 w-80 bg-gray-500 text-base-content">
+          <ul className="menu p-4 w-80 bg-gray-100 text-base-content">
             <li>
-              {!isSeller ? <Link to="/dashboard/myorders">My Orders</Link>:<></>}
+             <Link to="/dashboard/myorders">My Orders</Link>
             </li>
             {isAdmin && (
               <>
