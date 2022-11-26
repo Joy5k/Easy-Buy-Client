@@ -14,7 +14,6 @@ const Home = () => {
         }
 
     })
-    console.log(phonesCategory);
     if (isLoading) {
         return <div className='grid lg:grid-cols-3 md:grid-cols-2'>
             <SkeletonLoader></SkeletonLoader>

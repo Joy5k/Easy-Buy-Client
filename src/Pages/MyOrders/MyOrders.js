@@ -9,7 +9,11 @@ const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const [bookingsPhone, setBookingPhone] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/booking?email=${user.email}`)
+    axios.get(`http://localhost:5000/booking?email=${user.email}`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
       .then((data) => {
         setBookingPhone(data.data);
       });

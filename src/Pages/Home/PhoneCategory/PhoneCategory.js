@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SkeletonLoader from '../../../components/Skeleton loader/Skeleton loader';
-import Spinner from '../../../components/Spinner/Spinner';
 
 const PhoneCategory = ({ category}) => {
   const { brand } = category;

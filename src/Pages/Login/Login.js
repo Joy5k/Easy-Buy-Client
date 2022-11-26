@@ -4,56 +4,46 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthProvider";
-import useToken from "../../Hooks/Hooks";
+import useToken from "../../Hooks/useToken";
+
 
 const Login = () => {
   const { LoginUser, signInWithGoogle } = useContext(AuthContext);
-  const location = useLocation();
   const {user}=useContext(AuthContext)
-  const navigate=useNavigate()
-  const from = location.state?.from?.pathname || '/';
   const [email,setEmail]=useState('')
   const [token] = useToken(email);
-console.log(token,'check')
+  console.log(token, 'check')
+  const location = useLocation();
+  const navigate=useNavigate()
+  const from = location.state?.from?.pathname || '/';
+
+//   if (token) {
+//     navigate(from, { replace: true });
+// }
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
-    const userCategory = form.userOrSeller.value;
     const password = form.password.value;
-    const userInfo = {
-      email,
-      role: userCategory,
-    }
+  
     LoginUser(email, password)
       .then((result) => {
         const user = result.user;
-        navigate(from, { replace: true })
         setEmail(email)
         form.reset();
+        navigate(from, { replace: true })
       })
       .catch((error) => {
         toast.error(error.message)
         console.log(error.message);
       });
-    fetch('http://localhost:5000/user', {
-      method: 'POST',
-      headers: {
-        'content-type':'application/json'
-      },
-      body: JSON.stringify(userInfo)
-     
-    })
-    .then(res=>res.json())
-      .then(data => {
-      console.log(data)
-    })
   };
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(result => {
         const user = result.user;
-        console.log(user);
+        setEmail(user.email)
+        navigate(from, { replace: true })
       })
       .catch(error => {
         toast.error(error.message)
@@ -95,16 +85,12 @@ console.log(token,'check')
                       <label className="label">
                 <span className="label-text"></span>
               </label>
-            <select name="userOrSeller" className="select select-bordered w-32 max-w-xs">
-              <option value="user">user</option>
-              <option value="seller">seller</option>
-            </select>
             <div className="form-control mt-6">
-              <button className="btn btn-accent">Login</button>
+              <button type="submit" className="btn btn-primary">Login</button>
             </div>
             <Link to='/signup' className="text-primary underline">Create a new Account</Link>
             <div className="divider">Sign in with social</div>
-            <button onClick={handleGoogleSignIn} className="btn btn-accent">Google</button>
+            <button onClick={handleGoogleSignIn} className="btn btn-primary">Google</button>
           </div>
         </form>
       </div>

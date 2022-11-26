@@ -3,45 +3,64 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthProvider";
-import useToken from "../../Hooks/Hooks";
+import useToken from "../../Hooks/useToken";
+
 
 const SignUp = () => {
   const { createUser, UpdateUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
-  const[userEmail,setUserEmail]=useState('')
+  const [userEmail, setUserEmail] = useState("");
   const [token] = useToken(userEmail);
-  if(token){
-    navigate('/');
-}
+  //   if(token){
+  //     navigate('/');
+  // }
+  console.log(userEmail, "user email");
   const handleSignUp = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const name = form.name.value;
-    console.log(name,'my name')
+    const userCategory = form.userOrSeller.value;
+    const userInfo = {
+      email,
+      role: userCategory,
+      userName: name,
+    };
+    console.log(userInfo);
     const password = form.password.value;
     const data = {
-      displayName:name
-    }
+      displayName: name,
+    };
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        setUserEmail(email)
         UpdateUserInfo(data)
           .then(() => {
-          navigate('/')
+            fetch("http://localhost:5000/user", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+              },
+              body: JSON.stringify(userInfo),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                setUserEmail(email);
+              });
+            navigate("/");
           })
-          .catch(error => {
-          toast.error(error.message)
-        })
+          .catch((error) => {
+            toast.error(error.message);
+          });
         form.reset();
       })
       .catch((error) => {
-        toast.error(error.message)
+        toast.error(error.message);
         console.log(error.message);
       });
-     
   };
   return (
     <div className="hero w-full min-h-screen bg-base-200">
@@ -64,7 +83,7 @@ const SignUp = () => {
                 required
               />
             </div>
-    
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -89,10 +108,22 @@ const SignUp = () => {
                 required
               />
             </div>
+            <select
+              name="userOrSeller"
+              className="select select-bordered w-32 max-w-xs"
+            >
+              <option value="buyer">buyer</option>
+              <option value="seller">seller</option>
+            </select>
             <div className="form-control mt-6">
               <button className="btn btn-primary">signUp</button>
             </div>
-            <p>Already have an account? <Link to='/login' className="text-primary underline">Login</Link></p>
+            <p>
+              Already have an account?{" "}
+              <Link to="/login" className="text-primary underline">
+                Login
+              </Link>
+            </p>
           </div>
         </form>
       </div>
