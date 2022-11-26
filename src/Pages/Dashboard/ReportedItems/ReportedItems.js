@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { toast } from 'react-toastify';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const ReportedItems = () => {
     const { data: reporteditems = [] ,refetch,isLoading} = useQuery({
@@ -11,6 +12,7 @@ const ReportedItems = () => {
           return data;
         },
     });
+ 
     console.log(reporteditems, 'repoprt');
     const handleDeleteProduct = id => {
         fetch(`http://localhost:5000/myproducts/${id}`, {

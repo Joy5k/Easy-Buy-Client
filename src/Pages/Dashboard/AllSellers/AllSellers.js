@@ -2,9 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const AllSellers = () => {
-    const { data: sellers = [] ,refetch,isLoading} = useQuery({
+    const { data: sellers = [] ,isLoading,refetch} = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
           const res = await fetch(`http://localhost:5000/seller/${"seller"}`);
@@ -26,7 +27,25 @@ const AllSellers = () => {
           refetch();
       })
   }
-    return (
+  if (isLoading) {
+    return <Spinner></Spinner>
+  }
+  const handleSellerVerify = (id) => {
+    fetch(`http://localhost:5000/seller/${id}`,
+      {
+        method: 'PUT',
+        headers: {
+  authorization:`bearer ${localStorage.getItem('accessToken')}`          
+    }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount > 0) {
+          toast.success('successfully verified')
+        }
+      })
+  }
+  return (
       <div>
         {
           sellers.length>0 ? 
@@ -39,6 +58,7 @@ const AllSellers = () => {
               <th>Email</th>
               <th>Role</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -48,6 +68,9 @@ const AllSellers = () => {
                     <td>{seller.userName}</td>
                 <td>{seller.email}</td>
                 <td>{seller.role}</td>
+                <td>
+                  <button onClick={()=>handleSellerVerify(seller._id)}  className="btn btn-primary text-gray-300">Verify seller </button>
+                </td>
                 <td>
                   <button onClick={()=>handleDeleteSellers(seller._id)} className="btn bg-red-100 text-black">Delete</button>
                 </td>

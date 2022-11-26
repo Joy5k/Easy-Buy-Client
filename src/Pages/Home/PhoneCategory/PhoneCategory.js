@@ -5,11 +5,11 @@ const PhoneCategory = ({ category}) => {
   const { brand } = category;
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-xl">
-  <div className="card-body">
+        <div className="card-body">
+          <img className='w-full h-40' src={category.img} alt="" />
                 <h2 className="card-title">Brand: {brand }</h2>
-    <p> Click the Details Button and you will see the all phones of <span className='font-bold text-primary'>{brand}</span> categories </p>
-    <div className="card-actions justify-end">
-     <Link to={`/phones/${category._id}`}> <button className="btn btn-primary">Details</button></Link>
+    <div className="card-actions justify-center">
+     <Link className='w-full' to={`/phones/${category._id}`}> <button className="btn border-none text-slate-700 hover:text-white bg-gray-100 w-full">Details</button></Link>
     </div>
   </div>
 </div>

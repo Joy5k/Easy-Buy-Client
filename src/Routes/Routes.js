@@ -12,6 +12,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/Login/SignUp";
 import MyOrders from "../Pages/MyOrders/MyOrders";
+import Payment from "../Pages/MyOrders/Payment/Payment";
 import  Phones from "../Pages/Phones/Phones/Phones";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
@@ -53,6 +54,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        errorElement:<ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/dashboard',
@@ -81,6 +83,11 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/reporteditems',
                 element:<ReportedItems></ReportedItems>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
             },
         ]
     }

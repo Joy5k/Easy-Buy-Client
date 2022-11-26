@@ -4,12 +4,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { FaShopify } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../context/AuthProvider";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const [bookingsPhone, setBookingPhone] = useState([]);
+  const [loading,setLoading]=useState(true)
   useEffect(() => {
+    setLoading(true)
     axios.get(`http://localhost:5000/booking?email=${user.email}`, {
       headers: {
         authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -17,9 +21,12 @@ const MyOrders = () => {
     })
       .then((data) => {
         setBookingPhone(data.data);
+        setLoading(false)
       });
   }, [user.email]);
-
+  if (loading) {
+  return <Spinner></Spinner>
+}
   return (
     <div>
       {
@@ -36,14 +43,24 @@ const MyOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {bookingsPhone.map((phone, i) => (
+                {bookingsPhone.map((phone, i) => (
+              
               <tr key={i}>
                     {console.log('phone',bookingsPhone.length)}
                     <td><img className="w-20 h-20" src={phone?.itemImage} alt="" /></td>
                     <td>{phone.PhoneBrand }</td>
                     <td>{phone.model }</td>
                     <td>{phone.price }</td>
-                <td><button className="btn rounded-sm mr-1">PAY</button><button className="btn border-none rounded-sm  bg-orange-600">X</button></td>
+                <td>
+                  {phone.price && !phone.paid && <Link to={`/dashboard/payment/${phone._id}`}>
+
+                    <button className="btn rounded-sm mr-1">PAY</button>
+                  </Link>
+                  }
+                  {
+                    phone.price&& phone.paid && <span className="text-blue-500">Paid</span>
+                  }
+                </td>
                 <td></td>
                 
               </tr>

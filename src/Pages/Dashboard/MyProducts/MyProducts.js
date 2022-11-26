@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { FaShopify } from "react-icons/fa";
 import { toast } from "react-toastify";
+import Spinner from "../../../components/Spinner/Spinner";
 import { AuthContext } from "../../../context/AuthProvider";
 
 const MyProducts = () => {
@@ -15,7 +16,10 @@ const { data: myProducts = [] ,refetch,isLoading} = useQuery({
       const data = await res.json();
       return data;
     },
-  });
+});
+    if (isLoading) {
+        return <Spinner></Spinner>
+    }
     
     const handleDeleteProduct = id => {
         fetch(`http://localhost:5000/myproducts/${id}`, {

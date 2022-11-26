@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../context/AuthProvider";
 
@@ -15,14 +16,13 @@ const AddProduct = () => {
       return data;
     },
   });
-  // console.log(phonesCategory);
 
 console.log(user.email)
-
+const navigate = useNavigate();
   const handleAddProduct = (event) => {
     event.preventDefault();
     const form = event.target;
-    const brand = form.brand.value;
+    const categoryId = form.categoryId.value;
     const model = form.model.value;
     const location = form.location.value;
     const phoneNumber = form.phoneNumber.value;
@@ -33,7 +33,7 @@ console.log(user.email)
     const yearsOfUsed = form.yearsOfUsed.value;
     const description = form.description.value;
     const phoneInfo = {
-      categoryId:brand,
+      categoryId: categoryId,
       model,
       location,
       orignalPrice:OriginalPrice,
@@ -60,6 +60,7 @@ console.log(user.email)
         .then(data => {
           toast.success('Phone added successfully');
           form.reset()
+          navigate('/dashboard/myproduct')
           console.log(data);
       })
   };
@@ -161,10 +162,12 @@ console.log(user.email)
                 <span className="label-text">Phone Brand</span>
               </label>
               <select
-                name="brand" className="select select-bordered w-full max-w-xs"
+                name="categoryId" className="select select-bordered w-full max-w-xs"
               >
          {phonesCategory.map((category) => (
-             <option key={category._id} value={category._id}>
+           <option key={category._id}
+            
+             value={category._id}>
                     {category.brand} 
             </option>
                 ))}
