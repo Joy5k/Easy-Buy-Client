@@ -33,7 +33,7 @@ const Navbar = () => {
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-5 w-5 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -48,14 +48,14 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-compact text-black dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
               <Link>Home</Link>
             </li>
             <li tabIndex={0}>
               <Link className="justify-between">
-                Parent
+              Category
                 <svg
                   className="fill-current"
                   xmlns="http://www.w3.org/2000/svg"
@@ -67,16 +67,15 @@ const Navbar = () => {
                 </svg>
               </Link>
               <ul className="p-2">
-                <li>
-                  <Link>Submenu 1</Link>
+              {phonesCategory.map((category) => (
+                <li key={category._id}>
+                  <a href={`/phones/${category._id}`}>{category.brand}</a>
                 </li>
-                <li>
-                  <Link>Submenu 2</Link>
-                </li>
+              ))}
               </ul>
             </li>
             <li>
-              <Link>Item 3</Link>
+              <Link to='/blog'>Blog</Link>
             </li>
           </ul>
         </div>

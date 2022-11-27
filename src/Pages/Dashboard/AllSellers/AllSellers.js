@@ -10,6 +10,7 @@ const AllSellers = () => {
         queryFn: async () => {
           const res = await fetch(`http://localhost:5000/seller/${"seller"}`);
           const data = await res.json();
+          refetch()
           return data;
         },
     });
@@ -24,7 +25,7 @@ const AllSellers = () => {
         .then(data => {
           console.log('ok');
           toast.success('successfully Deleted')
-          refetch();
+         
       })
   }
   if (isLoading) {
@@ -42,6 +43,7 @@ const AllSellers = () => {
       .then(data => {
         if (data.modifiedCount > 0) {
           toast.success('successfully verified')
+          refetch()
         }
       })
   }
@@ -68,8 +70,11 @@ const AllSellers = () => {
                     <td>{seller.userName}</td>
                 <td>{seller.email}</td>
                 <td>{seller.role}</td>
-                <td>
+                <td>{
+                seller.verify!=="verified" ?
                   <button onClick={()=>handleSellerVerify(seller._id)}  className="btn btn-primary text-gray-300">Verify seller </button>
+                    : <span>Seller verified</span>
+                }
                 </td>
                 <td>
                   <button onClick={()=>handleDeleteSellers(seller._id)} className="btn bg-red-100 text-black">Delete</button>

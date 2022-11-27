@@ -4,10 +4,12 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Spinner from "../../../components/Spinner/Spinner";
 import { AuthContext } from "../../../context/AuthProvider";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
+  const [addproductLoading,setAddProdcutLoading]=useState(false)
   const { data: phonesCategory = [], isLoading } = useQuery({
     queryKey: ["phonesCategory"],
     queryFn: async () => {
@@ -16,7 +18,7 @@ const AddProduct = () => {
       return data;
     },
   });
-
+ 
 console.log(user.email)
 const navigate = useNavigate();
   const handleAddProduct = (event) => {
@@ -47,9 +49,11 @@ const navigate = useNavigate();
       description,
       role: 'seller',
       email: user.email,
+      sellerName:user?.displayName,
       uploadDate:time
 
     }
+    setAddProdcutLoading(true)
       fetch('http://localhost:5000/addPhone', {
         method: 'PUT',
         headers: {
@@ -65,8 +69,12 @@ const navigate = useNavigate();
           form.reset()
           navigate('/dashboard/myproduct')
           console.log(data);
+          setAddProdcutLoading(false)
       })
   };
+  if (isLoading||addproductLoading) {
+    return <Spinner></Spinner>
+  }
   return (
     <div>
       <div className="hero min-h-screen ">

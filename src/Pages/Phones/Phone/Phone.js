@@ -1,27 +1,28 @@
+
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { FaRegCheckCircle} from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const Phone = ({ phone, brand, setPhoneInfo }) => {
+  const [sellerVerified, setSellerVerified]=useState('')
+  
   const {
     model,
     img,
     location,
     orignalPrice,
-    usedTime,
+    yearsOfUsed,
     reselPrice,
     description,
-    uploadDate
+    uploadDate,
+    sellerName,
+    email,
+    verify
+
   } = phone;
-  const report = {
-    model,
-    img,
-    location,
-    orignalPrice,
-    usedTime,
-    reselPrice,
-    description,
-    // report:'reported',
-  }
+  console.log(phone,email,'check seller verify');
   const handleReport = id => {
     fetch(`http://localhost:5000/report/${id}`, {
       method: "put",
@@ -38,10 +39,16 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
         }
         else{toast.warning('already reported this phone')}
       })
-
 }
- 
-  console.log(phone,'need the iid')
+  useEffect(() => {
+    fetch(`http://localhost:5000/sellerVerified/${email}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data, 'got the email or seller info');
+        setSellerVerified(data)
+      })
+  }, [email])
+  console.log(sellerVerified,'verified')
   return (
     <div>
       <div className="my-16 card w-full bg-base-100 shadow-xl border">
@@ -63,7 +70,7 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
 
             <p><span className="text-primary font-bold">Model</span>:{model}</p>
           <p><span className="font-bold">location</span>:{location}</p>
-          <p><span className="font-bold">Used</span>: {usedTime} years</p>
+          <p><span className="font-bold">Used</span>: {yearsOfUsed} years</p>
           <p>
           <span className="font-bold">Original Price</span>: <del>{orignalPrice}</del> ${" "}
           </p>
@@ -71,7 +78,15 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
           <span className="font-bold">Resell Price</span>: <span className="font-bold">{reselPrice}$</span>
           </p>
           <p className="font-semibold">
-          <span className="font-bold">Uploaded</span>: <span className="font-bold">{uploadDate}$</span>
+          <span className="font-bold">Uploaded</span>: <span className="font-bold">{uploadDate}</span>
+          </p>
+          <p className="font-semibold flex">
+                <span className="font-bold">Seller</span>:
+                <span className="font-bold">{sellerVerified.userName}</span>
+                <span className="mx-2">{sellerVerified.verify === "verified" &&
+                 <FaRegCheckCircle className="text-white bg-blue-600 rounded-full mt-2"></FaRegCheckCircle>
+                }
+                </span>
           </p>
           <p>
             <span className="font-semibold ">Description: </span>

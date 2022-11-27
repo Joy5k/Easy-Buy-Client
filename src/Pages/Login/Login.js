@@ -4,22 +4,17 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthProvider";
-import useToken from "../../Hooks/useToken";
+
 
 
 const Login = () => {
   const { LoginUser, signInWithGoogle } = useContext(AuthContext);
   const {user}=useContext(AuthContext)
   const [email,setEmail]=useState('')
-  const [token] = useToken(email);
-  console.log(token, 'check')
   const location = useLocation();
   const navigate=useNavigate()
   const from = location.state?.from?.pathname || '/';
 
-//   if (token) {
-//     navigate(from, { replace: true });
-// }
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -29,9 +24,24 @@ const Login = () => {
     LoginUser(email, password)
       .then((result) => {
         const user = result.user;
-        setEmail(email)
-        form.reset();
-        navigate(from, { replace: true })
+        const currentUser = {
+          email:user.email
+        }
+        console.log(currentUser,'jwt email')
+        fetch('http://localhost:5000/jwt', {
+          method: 'POST',
+          headers: {
+            'content-type':'application/json'
+          },
+          body:JSON.stringify(currentUser)
+        })
+          .then(res => res.json())
+          .then(data => {
+            localStorage.setItem('accessToken',data.token)
+            console.log(data)
+            navigate(from, { replace: true })
+            form.reset();
+          })
       })
       .catch((error) => {
         toast.error(error.message)
@@ -42,6 +52,7 @@ const Login = () => {
     signInWithGoogle()
       .then(result => {
         const user = result.user;
+        
         setEmail(user.email)
         navigate(from, { replace: true })
       })

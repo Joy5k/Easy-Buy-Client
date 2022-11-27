@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { toast } from 'react-toastify';
-import Spinner from '../../../components/Spinner/Spinner';
+
 
 const ReportedItems = () => {
     const { data: reporteditems = [] ,refetch,isLoading} = useQuery({

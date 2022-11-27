@@ -9,9 +9,10 @@ import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../context/AuthProvider";
 
 const MyOrders = () => {
-  const { user } = useContext(AuthContext);
+  const { user,logOutUser } = useContext(AuthContext);
   const [bookingsPhone, setBookingPhone] = useState([]);
-  const [loading,setLoading]=useState(true)
+  const [loading, setLoading] = useState(true)
+  
   useEffect(() => {
     setLoading(true)
     axios.get(`http://localhost:5000/booking?email=${user.email}`, {
@@ -19,11 +20,18 @@ const MyOrders = () => {
         authorization: `bearer ${localStorage.getItem('accessToken')}`
       }
     })
-      .then((data) => {
+      .then(data => {
         setBookingPhone(data.data);
         setLoading(false)
-      });
-  }, [user.email]);
+      })
+    .catch(function (error) {
+      if (error.response.status===401||error.response.status===403) {
+        return logOutUser();
+      }
+    })
+  
+  }, [user.email,logOutUser]);
+
   if (loading) {
   return <Spinner></Spinner>
 }
