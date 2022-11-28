@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
             {
                 path: '/phones/:id',
                 element:<PrivateRoute><Phones></Phones></PrivateRoute>,
-                loader:({params})=>fetch(`http://localhost:5000/category/${params.id}`)
+                loader:({params})=>fetch(`https://y-dun-gamma.vercel.app/category/${params.id}`)
             }, {
                 path: '/blog',
                 element:<Blog></Blog>
@@ -87,7 +87,7 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
+                loader:({params})=>fetch(`https://y-dun-gamma.vercel.app/payment/${params.id}`)
             },
         ]
     }

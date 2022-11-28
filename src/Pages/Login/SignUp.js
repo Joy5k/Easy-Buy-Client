@@ -21,6 +21,20 @@ const SignUp = () => {
     const email = form.email.value;
     const name = form.name.value;
     const userCategory = form.userOrSeller.value;
+
+    fetch('https://y-dun-gamma.vercel.app/jwt', {
+      method: 'POST',
+      headers: {
+        'content-type':'application/json'
+      },
+      body:JSON.stringify(email)
+    })
+      .then(res => res.json())
+      .then(data => {
+        localStorage.setItem('accessToken',data.token)
+        console.log(data)
+      })
+
     const userInfo = {
       email,
       role: userCategory,
@@ -37,7 +51,7 @@ const SignUp = () => {
         console.log(user);
         UpdateUserInfo(data)
           .then(() => {
-            fetch("http://localhost:5000/user", {
+            fetch("https://y-dun-gamma.vercel.app/user", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -49,6 +63,8 @@ const SignUp = () => {
               .then((data) => {
                 console.log(data);
                 setUserEmail(email);
+
+              
               });
             navigate("/");
           })

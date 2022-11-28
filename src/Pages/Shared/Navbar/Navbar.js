@@ -17,7 +17,7 @@ const Navbar = () => {
   const { data: phonesCategory = [], isLoading } = useQuery({
     queryKey: ["phonesCategory"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/category");
+      const res = await fetch("https://y-dun-gamma.vercel.app/category");
       const data = await res.json();
       return data;
     },

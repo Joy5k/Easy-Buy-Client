@@ -11,11 +11,11 @@ import { AuthContext } from "../../context/AuthProvider";
 const MyOrders = () => {
   const { user,logOutUser } = useContext(AuthContext);
   const [bookingsPhone, setBookingPhone] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   
   useEffect(() => {
     setLoading(true)
-    axios.get(`http://localhost:5000/booking?email=${user.email}`, {
+    axios.get(`https://y-dun-gamma.vercel.app/booking?email=${user.email}`, {
       headers: {
         authorization: `bearer ${localStorage.getItem('accessToken')}`
       }
@@ -44,9 +44,9 @@ const MyOrders = () => {
           <thead>
             <tr>
               <th>Image</th>
-              <th>Brand</th>
               <th>Model</th>
               <th>Price</th>
+              <th></th>
               <th></th>
             </tr>
           </thead>
@@ -54,9 +54,8 @@ const MyOrders = () => {
                 {bookingsPhone.map((phone, i) => (
               
               <tr key={i}>
-                    {console.log('phone',bookingsPhone.length)}
                     <td><img className="w-20 h-20" src={phone?.itemImage} alt="" /></td>
-                    <td>{phone.PhoneBrand }</td>
+
                     <td>{phone.model }</td>
                     <td>{phone.price }</td>
                 <td>

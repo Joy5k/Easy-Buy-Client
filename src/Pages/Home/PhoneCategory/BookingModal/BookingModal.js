@@ -1,6 +1,9 @@
-import React from "react";
+
+import { reload } from "firebase/auth";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
+import Spinner from "../../../../components/Spinner/Spinner";
 import { AuthContext } from "../../../../context/AuthProvider";
 
 const BookingModal = ({ phoneInfo, brand, setCloseModal }) => {
@@ -25,7 +28,7 @@ const BookingModal = ({ phoneInfo, brand, setCloseModal }) => {
       userPhoneNumber: phoneNumber,
       userLocation: location,
     };
-    fetch("http://localhost:5000/booking", {
+    fetch("https://y-dun-gamma.vercel.app/booking", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -37,8 +40,10 @@ const BookingModal = ({ phoneInfo, brand, setCloseModal }) => {
         console.log(data);
         toast.success("Booking Confirmed");
         setCloseModal(false);
+     
       });
   };
+ 
   return (
     <>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />

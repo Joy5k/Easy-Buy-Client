@@ -6,10 +6,10 @@ import Advertisement from './Advertisement/Advertisement';
 import PhoneCategory from './PhoneCategory/PhoneCategory';
 
 const Home = () => {
-    const {data:phonesCategory=[],isLoading} = useQuery({
+    const {data:phonesCategory=[],isLoading,refetch} = useQuery({
         queryKey: ['phonesCategory'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/category')
+            const res = await fetch('https://y-dun-gamma.vercel.app/category')
             const data = await res.json();
             return data
         }
@@ -36,7 +36,7 @@ const Home = () => {
                 <h2 className=' mt-8 text-4xl font-bold text-gray-600  text-center'>Choose a Mobile Brand!</h2>
                 <p className='mt-2 m-16'>From  the Phone Category below.Make sure which brand's phone you want </p>
            </div>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mx-auto w-10/12 gap-4'>
+            <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mx-auto w-10/12 gap-4 p-4'>
             {
                 phonesCategory.map(category => <PhoneCategory
                     key={category._id}

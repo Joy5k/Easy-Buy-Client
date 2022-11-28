@@ -11,7 +11,12 @@ const MyProducts = () => {
 const { data: myProducts = [] ,refetch,isLoading} = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/myproduct?email=${user.email}`);
+      const res = await fetch(`https://y-dun-gamma.vercel.app/myproduct?email=${user.email}`, {
+        headers: {
+          authorization:`bearer ${localStorage.getItem('accessToken')}`
+        }
+      })
+       
       const data = await res.json();
       return data;
     },
@@ -21,7 +26,7 @@ const { data: myProducts = [] ,refetch,isLoading} = useQuery({
     }
     
     const handleDeleteProduct = id => {
-        fetch(`http://localhost:5000/myproducts/${id}`, {
+        fetch(`https://y-dun-gamma.vercel.app/myproducts/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -33,7 +38,21 @@ const { data: myProducts = [] ,refetch,isLoading} = useQuery({
             toast.success('successfully Deleted')
             refetch();
         })
-}
+  }
+  const addProductInAdvertise = (id) => {
+  console.log(id);
+    fetch(`https://y-dun-gamma.vercel.app/advertise/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type':'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data,'the adertised prduct');
+      toast.success('successfully added the product on advertise')
+    })
+  }
   return (
     <div>
       {myProducts.length > 0 ? (
@@ -48,20 +67,24 @@ const { data: myProducts = [] ,refetch,isLoading} = useQuery({
                   <th>Image</th>
                   <th>Model</th>
                   <th>Price</th>
-                  <th></th>
+                  <th>Advertise</th>
+                  <th>Delete Product</th>
                 </tr>
               </thead>
               <tbody>
                 {myProducts.map((phone, i) => (
-                    <tr key={i}>
-                        {console.log(phone._id)}
+                    <tr key={phone._id}>
                     <td>
                       <img className="w-20 h-20" src={phone?.img} alt="" />
                     </td>
                     <td>{phone.model}</td>
                     <td>{phone.reselPrice}</td>
                     <td>
-                      <button onClick={()=>handleDeleteProduct(phone._id)} className="btn rounded-sm mr-1">Delete</button>
+                      <button onClick={()=>addProductInAdvertise(phone._id)} className="btn rounded-sm mr-1">Advertise</button>
+                    </td>
+                    <td>
+                      <button onClick={()=>handleDeleteProduct(phone._id)} className="btn bg-red-700 text-white rounded-sm mr-1">Delete</button>
+                     
                     </td>
                     <td></td>
                   </tr>

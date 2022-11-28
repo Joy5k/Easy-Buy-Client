@@ -1,21 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { toast } from 'react-toastify';
+import Spinner from '../../../components/Spinner/Spinner';
 
 
 const ReportedItems = () => {
-    const { data: reporteditems = [] ,refetch,isLoading} = useQuery({
+    const { data: reporteditems = [] ,isLoading,refetch} = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
-          const res = await fetch('http://localhost:5000/report?report=reported');
+          const res = await fetch('https://y-dun-gamma.vercel.app/report?report=reported');
           const data = await res.json();
           return data;
         },
     });
- 
-    console.log(reporteditems, 'repoprt');
+  if (isLoading) {
+   return <Spinner></Spinner>
+ }
     const handleDeleteProduct = id => {
-        fetch(`http://localhost:5000/myproducts/${id}`, {
+        fetch(`https://y-dun-gamma.vercel.app/myproducts/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -51,7 +53,6 @@ const ReportedItems = () => {
               <tbody>
                 {reporteditems.map((phone, i) => (
                     <tr key={i}>
-                        {console.log(phone._id)}
                     <td>
                       <img className="w-20 h-20" src={phone?.img} alt="" />
                     </td>
@@ -73,7 +74,7 @@ const ReportedItems = () => {
           
           </span>
           <h3 className="text-6xl font-bold text-center my-auto text-gray-400 ">
-            You have no Products added yet
+          There isn't any reported product
           </h3>
         </div>
       )}

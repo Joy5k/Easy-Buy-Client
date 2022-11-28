@@ -8,24 +8,30 @@ const AllBuyers = () => {
   const { data: buyers = [] ,refetch,isLoading} = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users/${"buyer"}`);
+      const res = await fetch(`https://y-dun-gamma.vercel.app/users/${"buyer"}`, {
+        headers: {
+          authorization:`bearer ${localStorage.getItem('accessToken')}`
+        }
+      });
       const data = await res.json();
       return data;
     },
   });
   
  const handleUserDelete = (id) => {
-   fetch(`http://localhost:5000/user/${id}`,
+   fetch(`https://y-dun-gamma.vercel.app/user/${id}`,
      {
-       method: 'DELETE'
+       method: 'DELETE',
+       headers: {
+         authorization: `bearer ${localStorage.getItem('accessToken')}`
+       }
      })
      .then(res => res.json())
      .then(data => {
        console.log('ok');
        refetch()
+       toast.success('successfully Deleted Buyer')
      })
-   console.log(id)
-   toast.success('successfully Deleted Buyer')
   }
 
   if (isLoading) {

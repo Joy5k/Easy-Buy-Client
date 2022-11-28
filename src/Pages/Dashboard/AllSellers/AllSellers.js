@@ -8,22 +8,25 @@ const AllSellers = () => {
     const { data: sellers = [] ,isLoading,refetch} = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
-          const res = await fetch(`http://localhost:5000/seller/${"seller"}`);
+          const res = await fetch(`https://y-dun-gamma.vercel.app/seller/${"seller"}`, {
+            headers: {
+            authorization:`bearer ${localStorage.getItem('accessToken')}`
+          }
+          });
           const data = await res.json();
-          refetch()
           return data;
         },
     });
   const handleDeleteSellers = id => {
-    fetch(`http://localhost:5000/seller/${id}`, {
+    fetch(`https://y-dun-gamma.vercel.app/seller/${id}`, {
       method: 'DELETE', 
       headers: {
         authorization:`bearer ${localStorage.getItem('accessToken')}`
       }
     })
         .then(res => res.json())
-        .then(data => {
-          console.log('ok');
+      .then(data => {
+        refetch();
           toast.success('successfully Deleted')
          
       })
@@ -32,12 +35,12 @@ const AllSellers = () => {
     return <Spinner></Spinner>
   }
   const handleSellerVerify = (id) => {
-    fetch(`http://localhost:5000/seller/${id}`,
+    fetch(`https://y-dun-gamma.vercel.app/seller/${id}`,
       {
         method: 'PUT',
-        headers: {
-  authorization:`bearer ${localStorage.getItem('accessToken')}`          
-    }
+  //       headers: {
+  // authorization:`bearer ${localStorage.getItem('accessToken')}`          
+  //   }
       })
       .then(res => res.json())
       .then(data => {

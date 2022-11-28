@@ -5,11 +5,12 @@ import { useEffect } from "react";
 import { FaRegCheckCircle} from "react-icons/fa";
 import { toast } from "react-toastify";
 
-const Phone = ({ phone, brand, setPhoneInfo }) => {
+const Phone = ({ phone, setPhoneInfo }) => {
   const [sellerVerified, setSellerVerified]=useState('')
   
   const {
     model,
+    paid,
     img,
     location,
     orignalPrice,
@@ -17,14 +18,13 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
     reselPrice,
     description,
     uploadDate,
-    sellerName,
     email,
-    verify
+    
 
   } = phone;
   console.log(phone,email,'check seller verify');
   const handleReport = id => {
-    fetch(`http://localhost:5000/report/${id}`, {
+    fetch(`https://y-dun-gamma.vercel.app/report/${id}`, {
       method: "put",
       headers: {
         authorization:`bearer ${localStorage.getItem('accessToken')}`
@@ -32,7 +32,6 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if(data.modifiedCount > 0){
           toast.success('Send Reported to Admin successfully.')
     
@@ -41,16 +40,18 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
       })
 }
   useEffect(() => {
-    fetch(`http://localhost:5000/sellerVerified/${email}`)
+    fetch(`https://y-dun-gamma.vercel.app/sellerVerified/${email}`)
       .then(res => res.json())
       .then(data => {
         console.log(data, 'got the email or seller info');
         setSellerVerified(data)
       })
   }, [email])
-  console.log(sellerVerified,'verified')
   return (
     <div>
+      {
+    !paid &&
+    
       <div className="my-16 card w-full bg-base-100 shadow-xl border">
         <figure>
           <img className="h-96 " src={img} alt="Phones" />
@@ -114,6 +115,8 @@ const Phone = ({ phone, brand, setPhoneInfo }) => {
           </div>
         </div>
       </div>
+    
+  }
     </div>
   );
 };

@@ -14,10 +14,10 @@ const CheckoutForm = ({ phone }) => {
     const [clientSecret, setClientSecret] = useState("");
     const [loading, setLoading] = useState(false);
     const {price,email,_id}=phone
-    
+    console.log(_id,'this is id')
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://y-dun-gamma.vercel.app/create-payment-intent", {
           method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const CheckoutForm = ({ phone }) => {
       return;
     }
     const card = elements.getElement(CardElement);
-    if (card == null) {
+    if (card === null) {
       return;
     }
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -67,14 +67,14 @@ const CheckoutForm = ({ phone }) => {
           return
       }
       if (paymentIntent.status === 'succeeded') {
-         
+
           const payment = {
               price,
               transactionId: paymentIntent.id,
               email,
               bookingId:_id
           }
-          fetch('http://localhost:5000/payments', {
+          fetch('https://y-dun-gamma.vercel.app/payments', {
               method: 'POST',
               headers: {
                   'content-type': 'application/json',
@@ -88,6 +88,7 @@ const CheckoutForm = ({ phone }) => {
                     toast.success('Payment successful')
                     setTransactionId(paymentIntent.id)
                     setSuccess('payment completed')
+                  
                       navigate('/dashboard/myorders')
                 }
             })

@@ -18,7 +18,7 @@ const Payment = () => {
             <h3 className='text-4xl text-center font-bold text-gray-700'>Payment Here</h3>
             <div className='w-6/12 p-8 my-16 mx-auto  text-2xl  grid grid-cols-1 gap-4 shadow-2xl rounded-lg'>
                 <img src={phone.itemImage } alt="" />
-                <h2>Payment for <span className='font-bold '> {phone.PhoneBrand}</span></h2>
+                <h2>Payment for <span className='font-bold '> {phone.model}</span></h2>
                 <h2>Please Pay: <span className='font-bold ' >{phone.price}</span>$</h2>
          
                <div className='my-4'>
