@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Getting Started with Easy-Buy!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project create based on seconhand Phone buy and sell  [Easy-Buy](https://easy-buy-b8987.web.app/).
+* In this site created by these
+## What technology are used?
 
-## Available Scripts
+* React
 
-In the project directory, you can run:
+* Express.js
 
-### `npm start`
+* useQuery
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* axios
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* used strip for payment
 
-### `npm test`
+* node.js
+ 
+* mongodb
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* tailwind
 
-### `npm run build`
+* firebase for authentication 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* JSON web token for hide critical information 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ ## What are the Functionality in the web site?
 
-### `npm run eject`
+It created for user,seller and admin.
+* a user can buy any product and report any product
+* a seller can sell him/her product here. and he will be able to control  him/her product
+* admin! the web site's full contronled by the admin.admin can remove and product any seller and user also.
+admin route also secuirte by jwt 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### [visite the site](https://easy-buy-b8987.web.app/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### What features have been added?
+ * firstly a user may see some category of phone .If the user is valid or and click any category, it will chang route and will see the all product about the category
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+* User can Buy any product and the user is faced any harassment or fake information the the use can report about the product. 
+* Seller , seller can upload his product on the site.Also the seller can set his product on the home page advertisement section.seller can able to his product remove or sold out.
+* The entire website is admin controlled
+* Admin can delete any user or any seller
+*  The reported product can remove 
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Admin email:web@gmail.com
 
-### Code Splitting
+Admin password:123456
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+A seller email:web6@gmail.com
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+seller password:fffff
