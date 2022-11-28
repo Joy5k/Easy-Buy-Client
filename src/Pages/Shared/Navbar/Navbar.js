@@ -77,6 +77,11 @@ const Navbar = () => {
             <li>
               <Link to='/blog'>Blog</Link>
             </li>
+            <li>
+           {user ?  <Link to="/dashboard" >
+           Dashboard
+          </Link>:<>   </>}
+          </li>
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
