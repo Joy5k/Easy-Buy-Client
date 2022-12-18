@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const PhoneCategory = ({ category}) => {
   const { brand } = category;
     return (
-        <div className="card card-compact w-96 mx-auto bg-base-100 shadow-xl">
+        <div className="card card-compact w-80 mx-auto bg-base-100 shadow-xl">
         <div className="card-body">
           <img className='w-full h-40' src={category.img} alt="" />
                 <h2 className="card-title">Brand: {brand }</h2>

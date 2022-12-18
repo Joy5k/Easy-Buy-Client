@@ -15,6 +15,7 @@ import MyOrders from "../Pages/MyOrders/MyOrders";
 import Payment from "../Pages/MyOrders/Payment/Payment";
 import  Phones from "../Pages/Phones/Phones/Phones";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import ContactForm from "../Pages/ContactForm/ContactForm";
 
 export const router = createBrowserRouter([
     {
@@ -48,7 +49,11 @@ export const router = createBrowserRouter([
             {
                 path: '/myorders',
                 element:<PrivateRoute><MyOrders></MyOrders></PrivateRoute>
-            }
+            },
+            {
+                path: '/contact',
+                element:<ContactForm></ContactForm>
+            },
         ]
     },
     {

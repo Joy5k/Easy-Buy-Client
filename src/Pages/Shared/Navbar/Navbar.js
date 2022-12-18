@@ -81,7 +81,10 @@ const Navbar = () => {
            {user ?  <Link to="/dashboard" >
            Dashboard
           </Link>:<>   </>}
-          </li>
+            </li>
+            <li>
+              <Link to='/contact'>Contact</Link>
+            </li>
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
@@ -123,6 +126,9 @@ const Navbar = () => {
            Dashboard
           </Link>:<>   </>}
           </li>
+          <li>
+              <Link to='/contact'>Contact</Link>
+            </li>
         </ul>
       </div>
       <div className="navbar-end">
