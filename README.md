@@ -45,11 +45,13 @@ admin route also secuirte by jwt
 * Admin can delete any user or any seller
 *  The reported product can remove 
 
-
+Please login on the email for getting all access
 
 Admin email:web@gmail.com
 
 Admin password:123456
+
+If you want to access like seller please login with the seller email and passwornd
 
 A seller email:web6@gmail.com
 
