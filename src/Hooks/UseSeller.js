@@ -9,7 +9,6 @@ const UseSeller = email => {
                 .then(res => res.json())
                 .then(data => {
                     setIsSeller(data.isSeller);
-                    // setIsSellerLoading(false);
                 })
         }
     }, [email])

@@ -3,12 +3,10 @@ import React from "react";
 import swal from "sweetalert";
 import './ContactForm.css';
 
-const ContactForm = (e) => {
+const ContactForm = () => {
   const [state, handleSubmit] = useForm("mbjbnpqo");
   console.log(state, "check function");
-  const form=e.target;
   if (state.succeeded) {
-    form.reset();
     swal(
       "Thank You!",
       "I will Reply your message as soon as possible",
@@ -69,7 +67,7 @@ const ContactForm = (e) => {
           <form
             data-aos="fade-left"
             data-aos-duration="1500"
-            onSubmit={(e)=>handleSubmit}
+            onSubmit={handleSubmit}
             className="flex flex-col text-xl lg:p-10 space-y-6 md:py-0 md:px-6 ng-untouched ng-pristine ng-valid bg-gray-700 rounded-lg"
           >
             <label className="block">

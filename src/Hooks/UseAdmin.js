@@ -13,7 +13,7 @@ const UseAdmin = email => {
                 })
         }
     }, [email])
-    return [isAdmin,]
+    return [isAdmin]
 }
 // isAdminLoading
 
