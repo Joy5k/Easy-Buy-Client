@@ -9,6 +9,8 @@ function App() {
     <div className="max-w-[1440px] mx-auto">
       <RouterProvider router={router}></RouterProvider>
       <ToastContainer />
+      AOS.init();
+
     </div>
   );
 }

@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const PhoneCategory = ({ category}) => {
   const { brand } = category;
     return (
-        <div className="card card-compact w-80 mx-auto bg-base-100 shadow-xl">
+        <div data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="1500" className="card card-compact w-80 mx-auto bg-base-400 shadow-xl  my-4">
         <div className="card-body">
           <img className='w-full h-40' src={category.img} alt="" />
                 <h2 className="card-title">Brand: {brand }</h2>
@@ -15,5 +19,6 @@ const PhoneCategory = ({ category}) => {
 </div>
     );
 };
-
+AOS.init({
+})
 export default PhoneCategory;
