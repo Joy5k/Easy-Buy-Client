@@ -7,6 +7,7 @@ import { FaShopify, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../context/AuthProvider";
+import { toast } from "react-toastify";
 
 const MyOrders = () => {
   const { user, logOutUser } = useContext(AuthContext);
@@ -31,7 +32,21 @@ const MyOrders = () => {
         }
       });
   }, [user.email, logOutUser]);
-
+  const handleDeleteItem = (id) => {
+    fetch(`https://y-dun-gamma.vercel.app/booking/${id}`, {
+      method: "DELETE",
+      headers:{
+        authorization: `bearer${localStorage.getItem('accessToken')}`
+    }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        console.log('ok');
+        toast.success('successfully Deleted')
+    })
+ console.log(id);
+  }
   if (loading) {
     return <Spinner></Spinner>;
   }
@@ -74,7 +89,7 @@ const MyOrders = () => {
                   </td>
                   <td>
                   <div className="tooltip" data-tip="remove Item">
-                      <button className="btn bg-transparent border-none
+                      <button onClick={()=>handleDeleteItem(phone._id)} className="btn bg-transparent border-none
                     hover:bg-transparent"> <FaTrashAlt className="text-xl text-black hover:text-red-500 cursor-pointer "></FaTrashAlt></button>
                   </div>
                   </td>
