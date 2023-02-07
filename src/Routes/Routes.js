@@ -16,6 +16,7 @@ import Payment from "../Pages/MyOrders/Payment/Payment";
 import  Phones from "../Pages/Phones/Phones/Phones";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import ContactForm from "../Pages/ContactForm/ContactForm";
+import AllProducts from "../Pages/Dashboard/AllProducts/AllProducts";
 
 export const router = createBrowserRouter([
     {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/allbuyers',
                 element: <AllBuyers></AllBuyers>
+            },
+            {
+                path: '/dashboard/allPhones',
+                element: <AllProducts></AllProducts>
             },
             {
                 path: '/dashboard/allsellers',
