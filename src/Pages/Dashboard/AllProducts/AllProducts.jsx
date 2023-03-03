@@ -1,14 +1,10 @@
 import React from 'react';
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
 import { FaShopify } from "react-icons/fa";
-import { toast } from "react-toastify";
 import Spinner from "../../../components/Spinner/Spinner";
-import { AuthContext } from "../../../context/AuthProvider";
 import swal from 'sweetalert';
 
 const AllProducts = () => {
-    const { user } = useContext(AuthContext);
     const { data: myProducts = [] ,refetch,isLoading} = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
